@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="icon.ico">
     <title>SwimShark</title>
     <style>
         * {
@@ -32,23 +33,99 @@
             line-height: 1.4;
         }
 
-        .filter-panel {
-            background-color: #E0E0E8;
-            border-radius: 12px;
-            padding: 8px;
-            margin-bottom: 8px;
-        }
+        	.filter-panel {
+		background-color: #E0E0E8;
+		border-radius: 12px;
+		padding: 12px;
+		margin-bottom: 8px;
+	}
 
-        .filter-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 5px;
-        }
+	.filter-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 10px;
+		flex-wrap: nowrap; /* На ПК - в строку */
+	}
 
-        .filter-row:last-child {
-            margin-bottom: 0;
-        }
+	.filter-row:last-child {
+		margin-bottom: 0;
+	}
+
+	.filter-label {
+		color: #2C3E50;
+		font-size: 14px;
+		min-width: 70px;
+		white-space: nowrap;
+	}
+
+	select {
+		flex: 1;
+		padding: 10px 12px;
+		border: 1px solid #BDBDBD;
+		border-radius: 8px;
+		background-color: white;
+		color: #2C3E50;
+		font-size: 14px;
+		cursor: pointer;
+		min-width: 120px;
+	}
+
+	/* === МОБИЛЬНАЯ ВЕРСИЯ (экран < 600px) === */
+	@media (max-width: 600px) {
+		.filter-panel {
+			padding: 10px;
+		}
+		
+		.filter-row {
+			flex-direction: column; /* Вертикально */
+			align-items: stretch; /* Растянуть на всю ширину */
+			gap: 6px;
+			margin-bottom: 12px;
+		}
+		
+		.filter-label {
+			min-width: auto;
+			font-size: 13px;
+			font-weight: 600;
+			margin-bottom: 2px;
+		}
+		
+		select {
+			width: 100%; /* На всю ширину */
+			min-width: auto;
+			font-size: 16px; /* Крупнее для тача */
+			padding: 12px;
+		}
+		
+		.title {
+			font-size: 18px;
+		}
+		
+		.rank-card {
+			padding: 12px;
+		}
+		
+		.rank-label {
+			font-size: 16px;
+		}
+		
+		.time-label {
+			font-size: 22px;
+		}
+	}
+
+	/* === ПЛАНШЕТЫ (600px - 900px) === */
+	@media (min-width: 601px) and (max-width: 900px) {
+		.filter-row {
+			flex-wrap: wrap; /* Перенос при необходимости */
+		}
+		
+		select {
+			flex: 1 1 45%; /* ~половина строки */
+			min-width: 140px;
+		}
+	}
 
         .filter-label {
             color: #2C3E50;
@@ -296,34 +373,39 @@
     <div class="container">
         <h1 class="title">Плавание (Россия)<br>Нормативы и рекорды</h1>
 
-        <div class="filter-panel">
-            <div class="filter-row">
-                <label class="filter-label">Пол:</label>
-                <select id="genderSpinner">
-                    <option value="Мужчины">Мужчины</option>
-                    <option value="Женщины">Женщины</option>
-                </select>
-                <label class="filter-label pool">Бассейн:</label>
-                <select id="poolSpinner">
-                    <option value="50 м">50 м</option>
-                    <option value="25 м">25 м</option>
-                </select>
-            </div>
-            <div class="filter-row">
-                <label class="filter-label">Стиль:</label>
-                <select id="styleSpinner">
-                    <option value="Вольный">Вольный</option>
-                    <option value="На спине">На спине</option>
-                    <option value="Баттерфляй">Баттерфляй</option>
-                    <option value="Брасс">Брасс</option>
-                    <option value="Комплекс">Комплекс</option>
-                </select>
-                <label class="filter-label pool">Дистанция:</label>
-                <select id="distanceSpinner">
-                    <option value="">Выберите</option>
-                </select>
-            </div>
-        </div>
+	<div class="filter-panel">
+		<!-- Row 1: Пол + Бассейн -->
+		<div class="filter-row">
+			<label class="filter-label">Пол:</label>
+			<select id="genderSpinner">
+				<option value="Мужчины">Мужчины</option>
+				<option value="Женщины">Женщины</option>
+			</select>
+			
+			<label class="filter-label">Бассейн:</label>
+			<select id="poolSpinner">
+				<option value="50 м">50 м</option>
+				<option value="25 м">25 м</option>
+			</select>
+		</div>
+		
+		<!-- Row 2: Стиль + Дистанция -->
+		<div class="filter-row">
+			<label class="filter-label">Стиль:</label>
+			<select id="styleSpinner">
+				<option value="Вольный">Вольный</option>
+				<option value="На спине">На спине</option>
+				<option value="Баттерфляй">Баттерфляй</option>
+				<option value="Брасс">Брасс</option>
+				<option value="Комплекс">Комплекс</option>
+			</select>
+			
+			<label class="filter-label">Дистанция:</label>
+			<select id="distanceSpinner">
+				<option value="">Выберите</option>
+			</select>
+		</div>
+	</div>
 
         <div class="input-box">
             <input type="text" class="time-input" id="timeInput" placeholder="Ваше время (1:23.45)">
